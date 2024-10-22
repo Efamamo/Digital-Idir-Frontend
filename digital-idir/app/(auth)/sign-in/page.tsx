@@ -3,43 +3,70 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import CustomForm from '@/components/ui/CustomForm';
+import { Form } from '@/components/ui/form';
 import { signInFormSchema } from '@/lib/utils';
 import Image from 'next/image';
 import Devider from '@/components/ui/Devider';
 import Link from 'next/link';
 import SignInField from '@/components/ui/SignInField';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export function SignIn() {
+  const [credentialError, setCredentialError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues: {},
   });
 
-  function onSubmit(values: z.infer<typeof signInFormSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof signInFormSchema>) {
+    setCredentialError('');
+    setEmailError('');
+    setIsLoading(true);
+    const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    });
+    setIsLoading(false);
+
+    if (response.status !== 201) {
+      const data = await response.json();
+      if (response.status === 401) {
+        setCredentialError(data.error);
+      }
+
+      if (data.error?.includes('email')) {
+        setEmailError(data.error);
+      }
+      console.log(data);
+    } else {
+      const data = await response.json();
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
+
+      router.push('/');
+    }
   }
 
   return (
-    <section className="mt-40">
-      <h1 className="text-2xl font-bold text-center mb-4">Sign In</h1>
-      <div className="max-w-lg mx-auto">
-        <Button className="w-full my-4 bg-white text-black hover:text-white border-gray-500 border rounded-md">
+    <section className="my-5 md:mt-40">
+      <h1 className="text-2xl font-bold text-center mb-2">Sign In</h1>
+      <div className="max-w-lg mx-5 md:mx-auto">
+        <Button
+          className="w-full my-4 bg-white text-black hover:bg-gray-50 border-gray-500 border rounded-md"
+          onClick={() => {
+            window.location.href = 'http://localhost:5000/api/v1/auth/google';
+          }}
+        >
           <Image src="/assets/google.svg" alt="google" width={20} height={20} />
           Sign In With Gogle
         </Button>
@@ -52,6 +79,7 @@ export function SignIn() {
               label="Email"
               control={form.control}
               placeholder="Enter Your Email"
+              error={emailError}
             />
 
             <SignInField
@@ -62,11 +90,25 @@ export function SignIn() {
               placeholder="Enter Your Password"
             />
 
+            {credentialError && (
+              <p className="text-red-600 text-sm">{credentialError}</p>
+            )}
+
             <Button
-              className="w-full block mt-4 bg-blue-600 text-white text-base font-semibold hover:bg-blue-600"
+              className="w-full block mt-4 bg-blue-600 hover:bg-blue-700"
               type="submit"
             >
-              Sign In
+              {!isLoading ? (
+                'Sign In'
+              ) : (
+                <Image
+                  src="/assets/loading.svg"
+                  alt="loading"
+                  width={30}
+                  height={30}
+                  className="mx-auto"
+                />
+              )}
             </Button>
           </form>
         </Form>

@@ -3,7 +3,6 @@ import { z } from 'zod';
 
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,6 +18,7 @@ interface FormInterface {
   label: string;
   type: string;
   placeholder: string;
+  error?: string;
 }
 
 function SignInField({
@@ -27,6 +27,7 @@ function SignInField({
   label,
   type,
   placeholder,
+  error,
 }: FormInterface) {
   return (
     <FormField
@@ -37,7 +38,7 @@ function SignInField({
           <FormLabel className="text-gray-800 text-base">{label}</FormLabel>
           <FormControl>
             <Input
-              className="w-full"
+              className="w-full focus-visible:ring-0 focus:border-gray-500"
               placeholder={placeholder}
               type={type}
               {...field}
@@ -48,6 +49,7 @@ function SignInField({
               {fieldState.error.message}
             </FormMessage>
           )}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
         </FormItem>
       )}
     />

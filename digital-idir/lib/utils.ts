@@ -23,21 +23,17 @@ export const signUpFormSchema = z
     password: z
       .string({ message: 'Password is Required' })
       .min(6, { message: 'Minimum password length is 6' }),
-    confirmPassword: z
-      .string({ message: 'Confirm Your Password' })
-      .min(6, { message: 'Minimum password length is 6' }),
+    confirmPassword: z.string({ message: 'Confirm your password' }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    path: ['confirmPassword'], // Path to the confirmPassword field
+    path: ['confirmPassword'],
     message: 'Passwords do not match',
   });
 
 export const signInFormSchema = z.object({
   email: z
     .string({ message: 'Email is Required' })
-    .email({ message: 'Invalid email format' }),
+    .email({ message: 'Invalid Email format' }),
 
-  password: z
-    .string({ message: 'Password is Required' })
-    .min(6, { message: 'Minimum password length is 6' }),
+  password: z.string({ message: 'Password is Required' }),
 });

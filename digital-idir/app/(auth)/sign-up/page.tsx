@@ -5,39 +5,67 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 import CustomForm from '@/components/ui/CustomForm';
 import { signUpFormSchema } from '@/lib/utils';
 import Image from 'next/image';
 import Devider from '@/components/ui/Devider';
 import Link from 'next/link';
+import { useReducer, useState } from 'react';
+import { redirect, useRouter } from 'next/navigation';
 
 export function SignUp() {
+  const [usernameError, setUsernameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setpasswordError] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
-    defaultValues: {
-      username: '',
-    },
+    defaultValues: {},
   });
 
-  function onSubmit(values: z.infer<typeof signUpFormSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof signUpFormSchema>) {
+    setEmailError('');
+    setPhoneNumberError('');
+    const body = new FormData();
+    body.append('username', values.username);
+    body.append('email', values.email);
+    body.append('password', values.password);
+    body.append('phoneNumber', values.phoneNumber);
+    setIsLoading(true);
+    const response = await fetch('http://localhost:5000/api/v1/auth/signup', {
+      method: 'POST',
+      body,
+    });
+    setIsLoading(false);
+
+    if (response.status !== 201) {
+      const data = await response.json();
+      if (data.error.includes('email')) {
+        setEmailError(data.error);
+      }
+
+      if (data.error.includes('phoneNumber')) {
+        setPhoneNumberError(data.error);
+      }
+    } else {
+      router.push('/verify');
+    }
   }
 
   return (
-    <section className="mt-20">
-      <h1 className="text-2xl font-bold text-center mb-4">Sign Up</h1>
-      <div className="max-w-lg mx-auto">
-        <Button className="w-full my-4 bg-white text-black hover:text-white border-gray-500 border rounded-md">
+    <section className="my-5 md:mt-20">
+      <h1 className="text-2xl font-bold text-center mb-2">Sign Up</h1>
+      <div className="max-w-lg mx-5 md:mx-auto">
+        <Button
+          className="w-full my-4 bg-white text-black hover:text-white border-gray-500 border rounded-md"
+          onClick={() => {
+            window.location.href = 'http://localhost:5000/api/v1/auth/google';
+          }}
+        >
           <Image src="/assets/google.svg" alt="google" width={20} height={20} />
           Sign Up With Gogle
         </Button>
@@ -50,6 +78,7 @@ export function SignUp() {
               label="Username"
               control={form.control}
               placeholder="Enter Your Username"
+              error={usernameError}
             />
             <CustomForm
               name="email"
@@ -57,6 +86,7 @@ export function SignUp() {
               label="Email"
               control={form.control}
               placeholder="Enter Your Email"
+              error={emailError}
             />
             <CustomForm
               name="phoneNumber"
@@ -64,6 +94,7 @@ export function SignUp() {
               label="Phone Number"
               control={form.control}
               placeholder="Enter Your Phone Number"
+              error={phoneNumberError}
             />
             <CustomForm
               name="password"
@@ -71,21 +102,29 @@ export function SignUp() {
               label="Password"
               control={form.control}
               placeholder="Enter Your Password"
+              error={passwordError}
             />
 
             <CustomForm
               name="confirmPassword"
               type="password"
-              label="ConfirmPassword"
+              label="Confirm Password"
               control={form.control}
               placeholder="Enter Your Password Again"
             />
 
-            <Button
-              className="w-full block mt-4 bg-blue-600 text-white text-base font-semibold hover:bg-blue-600"
-              type="submit"
-            >
-              Sign Up
+            <Button className="w-full block mt-4" type="submit">
+              {!isLoading ? (
+                'Sign Up'
+              ) : (
+                <Image
+                  src="/assets/loading.svg"
+                  alt="loading"
+                  width={30}
+                  height={30}
+                  className="mx-auto"
+                />
+              )}
             </Button>
           </form>
         </Form>

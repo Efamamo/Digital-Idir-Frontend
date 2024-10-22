@@ -19,6 +19,7 @@ interface FormInterface {
   label: string;
   type: string;
   placeholder: string;
+  error?: string;
 }
 
 function CustomForm({
@@ -27,6 +28,7 @@ function CustomForm({
   label,
   type,
   placeholder,
+  error,
 }: FormInterface) {
   return (
     <FormField
@@ -36,13 +38,19 @@ function CustomForm({
         <FormItem className="mb-4">
           <FormLabel className="text-gray-800 text-base">{label}</FormLabel>
           <FormControl>
-            <Input className="w-full" placeholder={placeholder} type={type} />
+            <Input
+              className="w-full focus-visible:ring-0 focus:border-gray-500"
+              placeholder={placeholder}
+              type={type}
+              {...field}
+            />
           </FormControl>
           {fieldState.error && (
             <FormMessage className="text-red-600 text-sm">
               {fieldState.error.message}
             </FormMessage>
           )}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
         </FormItem>
       )}
     />
