@@ -58,65 +58,81 @@ export function SignIn() {
   }
 
   return (
-    <section className="my-5 md:mt-40">
-      <h1 className="text-2xl font-bold text-center mb-2">Sign In</h1>
-      <div className="max-w-lg mx-5 md:mx-auto">
-        <Button
-          className="w-full my-4 bg-white text-black hover:bg-gray-50 border-gray-500 border rounded-md"
-          onClick={() => {
-            window.location.href = 'http://localhost:5000/api/v1/auth/google';
-          }}
-        >
-          <Image src="/assets/google.svg" alt="google" width={20} height={20} />
-          Sign In With Gogle
-        </Button>
-        <Devider />
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <SignInField
-              name="email"
-              type="email"
-              label="Email"
-              control={form.control}
-              placeholder="Enter Your Email"
-              error={emailError}
-            />
-
-            <SignInField
-              name="password"
-              type="password"
-              label="Password"
-              control={form.control}
-              placeholder="Enter Your Password"
-            />
-
-            {credentialError && (
-              <p className="text-red-600 text-sm">{credentialError}</p>
+    <section className="flex justify-center items-center min-h-screen">
+      <div className="max-w-2xl mx-5 md:mx-auto p-6 shadow-xl flex-1 rounded-lg">
+        <h1 className="text-3xl font-bold text-center mb-2">Sign In</h1>
+        <div className="max-w-lg mx-5 md:mx-auto">
+          <Button
+            className="w-full my-4 bg-white text-black hover:bg-gray-400 border rounded-md"
+            onClick={() => {
+              window.location.href = 'http://localhost:5000/api/v1/auth/google';
+            }}
+          >
+            {isLoading ? (
+              <Image
+                src="/assets/loading_black.svg"
+                alt="loading"
+                width={20}
+                height={20}
+              />
+            ) : (
+              <Image
+                src="/assets/google.svg"
+                alt="google"
+                width={20}
+                height={20}
+              />
             )}
+            Sign In With Gogle
+          </Button>
+          <Devider />
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <SignInField
+                name="email"
+                type="email"
+                label="Email"
+                control={form.control}
+                placeholder="Enter Your Email"
+                error={emailError}
+              />
 
-            <Button
-              className="w-full block mt-4 bg-blue-600 hover:bg-blue-700"
-              type="submit"
-            >
-              {!isLoading ? (
-                'Sign In'
-              ) : (
-                <Image
-                  src="/assets/loading.svg"
-                  alt="loading"
-                  width={30}
-                  height={30}
-                  className="mx-auto"
-                />
+              <SignInField
+                name="password"
+                type="password"
+                label="Password"
+                control={form.control}
+                placeholder="Enter Your Password"
+              />
+
+              {credentialError && (
+                <p className="text-red-600 text-sm">{credentialError}</p>
               )}
-            </Button>
-          </form>
-        </Form>
-        <div className="flex gap-1 justify-center mt-2">
-          <h3>Don't have an account?</h3>
-          <Link href="/sign-up" className="text-blue-600">
-            Sign Up
-          </Link>
+
+              <Button
+                className="w-full block mt-4 bg-blue-600 hover:bg-blue-700"
+                type="submit"
+              >
+                {!isLoading ? (
+                  'Sign In'
+                ) : (
+                  <Image
+                    src="/assets/loading.svg"
+                    alt="loading"
+                    width={30}
+                    height={30}
+                    className="mx-auto"
+                  />
+                )}
+              </Button>
+            </form>
+          </Form>
+          <div className="flex gap-1 justify-center mt-3">
+            <h3>Don't have an account?</h3>
+            <Link href="/sign-up" className="text-blue-600">
+              Sign Up
+            </Link>
+          </div>
         </div>
       </div>
     </section>

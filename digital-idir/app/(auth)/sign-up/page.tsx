@@ -57,82 +57,101 @@ export function SignUp() {
   }
 
   return (
-    <section className="my-5 md:mt-20">
-      <h1 className="text-2xl font-bold text-center mb-2">Sign Up</h1>
-      <div className="max-w-lg mx-5 md:mx-auto">
-        <Button
-          className="w-full my-4 bg-white text-black hover:text-white border-gray-500 border rounded-md"
-          onClick={() => {
-            window.location.href = 'http://localhost:5000/api/v1/auth/google';
-          }}
-        >
-          <Image src="/assets/google.svg" alt="google" width={20} height={20} />
-          Sign Up With Gogle
-        </Button>
-        <Devider />
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <CustomForm
-              name="username"
-              type="text"
-              label="Username"
-              control={form.control}
-              placeholder="Enter Your Username"
-              error={usernameError}
-            />
-            <CustomForm
-              name="email"
-              type="email"
-              label="Email"
-              control={form.control}
-              placeholder="Enter Your Email"
-              error={emailError}
-            />
-            <CustomForm
-              name="phoneNumber"
-              type="phone"
-              label="Phone Number"
-              control={form.control}
-              placeholder="Enter Your Phone Number"
-              error={phoneNumberError}
-            />
-            <CustomForm
-              name="password"
-              type="password"
-              label="Password"
-              control={form.control}
-              placeholder="Enter Your Password"
-              error={passwordError}
-            />
+    <section className="flex justify-center items-center min-h-screen">
+      <div className="max-w-2xl mx-5 md:mx-auto p-6 shadow-xl flex-1 rounded-lg">
+        <h1 className="text-3xl font-bold text-center mb-2">Sign Up</h1>
+        <div className="max-w-lg mx-5 md:mx-auto">
+          <Button
+            className="w-full my-4 bg-white text-black  hover:bg-gray-400 border rounded-md"
+            onClick={() => {
+              window.location.href = 'http://localhost:5000/api/v1/auth/google';
+            }}
+          >
+            {isLoading ? (
+              <Image
+                src="/assets/loading_black.svg"
+                alt="loading"
+                width={20}
+                height={20}
+              />
+            ) : (
+              <Image
+                src="/assets/google.svg"
+                alt="google"
+                width={20}
+                height={20}
+              />
+            )}
+            Sign Up With Gogle
+          </Button>
+          <Devider />
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <CustomForm
+                name="username"
+                type="text"
+                label="Username"
+                control={form.control}
+                placeholder="Enter Your Username"
+                error={usernameError}
+              />
+              <CustomForm
+                name="email"
+                type="email"
+                label="Email"
+                control={form.control}
+                placeholder="Enter Your Email"
+                error={emailError}
+              />
+              <CustomForm
+                name="phoneNumber"
+                type="phone"
+                label="Phone Number"
+                control={form.control}
+                placeholder="Enter Your Phone Number"
+                error={phoneNumberError}
+              />
+              <CustomForm
+                name="password"
+                type="password"
+                label="Password"
+                control={form.control}
+                placeholder="Enter Your Password"
+                error={passwordError}
+              />
 
-            <CustomForm
-              name="confirmPassword"
-              type="password"
-              label="Confirm Password"
-              control={form.control}
-              placeholder="Enter Your Password Again"
-            />
+              <CustomForm
+                name="confirmPassword"
+                type="password"
+                label="Confirm Password"
+                control={form.control}
+                placeholder="Enter Your Password Again"
+              />
 
-            <Button className="w-full block mt-4" type="submit">
-              {!isLoading ? (
-                'Sign Up'
-              ) : (
-                <Image
-                  src="/assets/loading.svg"
-                  alt="loading"
-                  width={30}
-                  height={30}
-                  className="mx-auto"
-                />
-              )}
-            </Button>
-          </form>
-        </Form>
-        <div className="flex gap-1 justify-center mt-2">
-          <h3>Already have an account?</h3>
-          <Link href="/sign-in" className="text-blue-600">
-            Sign In
-          </Link>
+              <Button
+                className="w-full block mt-4 bg-blue-600 hover:bg-blue-700"
+                type="submit"
+              >
+                {!isLoading ? (
+                  'Sign Up'
+                ) : (
+                  <Image
+                    src="/assets/loading.svg"
+                    alt="loading"
+                    width={30}
+                    height={30}
+                    className="mx-auto"
+                  />
+                )}
+              </Button>
+            </form>
+          </Form>
+          <div className="flex gap-1 justify-center mt-3">
+            <h3>Already have an account?</h3>
+            <Link href="/sign-in" className="text-blue-600">
+              Sign In
+            </Link>
+          </div>
         </div>
       </div>
     </section>
