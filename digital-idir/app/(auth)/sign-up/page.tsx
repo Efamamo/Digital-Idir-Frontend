@@ -82,7 +82,7 @@ export function SignUp() {
                 height={20}
               />
             )}
-            Sign Up With Gogle
+            <p className="text-base font-semibold">Sign Up With Gogle</p>
           </Button>
           <Devider />
           <Form {...form}>
@@ -133,7 +133,7 @@ export function SignUp() {
                 type="submit"
               >
                 {!isLoading ? (
-                  'Sign Up'
+                  <p className="text-base font-semibold">Sign Up</p>
                 ) : (
                   <Image
                     src="/assets/loading.svg"

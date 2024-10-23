@@ -12,14 +12,10 @@ function Callback() {
     const refreshToken = params.get('refreshToken');
 
     if (accessToken && refreshToken) {
-      // Store tokens in localStorage
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-
-      // Redirect to dashboard
       router.push('/');
     } else {
-      // Handle the error if tokens are missing
       router.push('/login');
     }
   }, [router]);
