@@ -47,8 +47,8 @@ const Accordion = () => {
   };
 
   return (
-    <section className="py-28">
-      <h2 className="text-4xl font-bold mb-10 text-center text-white">
+    <section className="py-28 px-5 md:px-0">
+      <h2 className="text-2xl md:text-4xl font-bold mb-10 text-center text-white">
         Frequently Asked Questions
       </h2>
       <div className="w-full max-w-7xl mx-auto">
@@ -58,7 +58,9 @@ const Accordion = () => {
               className="flex justify-between items-center p-4 rounded-sm bg-gray-100 cursor-pointer hover:bg-gray-200 transition-colors duration-300"
               onClick={() => toggleAccordion(index)}
             >
-              <span className="font-semibold">{qa.question}</span>
+              <span className="font-semibold text-sm md:text-base">
+                {qa.question}
+              </span>
               <span
                 className={`ml-2 transform transition-transform duration-300 ${
                   activeIndex === index ? 'rotate-180' : ''
@@ -69,7 +71,7 @@ const Accordion = () => {
             </div>
             {activeIndex === index && (
               <div className="p-4 text-white duration">
-                <p>{qa.answer}</p>
+                <p className="text-sm md:text-base">{qa.answer}</p>
               </div>
             )}
           </div>

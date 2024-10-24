@@ -3,8 +3,8 @@ import Feature from './Feature';
 
 function Features() {
   return (
-    <section className="py-28 text-white">
-      <h2 className="text-4xl font-bold mb-10 text-center">
+    <section className="py-28 px-5 md:px-0 text-white">
+      <h2 className="text-2xl md:text-4xl font-bold mb-10 text-center">
         {' '}
         Why Choose Digital Idir?
       </h2>

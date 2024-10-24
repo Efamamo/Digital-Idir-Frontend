@@ -20,8 +20,8 @@ function ContactForm() {
 
   async function onSubmit(values: z.infer<typeof contactFormSchema>) {}
   return (
-    <div className="flex-1 max-w-lg border border-gray-300 p-8 rounded-lg">
-      <h3 className="text-3xl font-semibold">Get in Touch</h3>
+    <div className="flex-1 max-w-lg bg-[#1F1F22] p-8 shadow-lg rounded-lg">
+      <h3 className="text-2xl md:text-3xl font-semibold">Get in Touch</h3>
       <p>You can reach us anytime</p>
 
       <Form {...form}>

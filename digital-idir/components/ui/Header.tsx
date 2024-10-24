@@ -1,12 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import MobileNav from './MobileNav';
 
 function Header() {
   return (
     <div className="absolute w-full text-white">
       <div className="flex justify-between items-center mt-6 mx-8">
-        <div className="flex gap-2 items-center">
+        <div className="md:hidden">
+          <MobileNav />
+        </div>
+        <div className="hidden md:flex gap-2 items-center">
           <Link
             href="/"
             className="text-3xl font-bold mb-4"
@@ -36,7 +40,7 @@ function Header() {
             Log in
           </Link>
           <Link
-            className="bg-transparent border-2 border-white px-6 py-2 rounded-full text-lg font-semibold hover:bg-white hover:text-black"
+            className="bg-transparent border-2 border-white px-4 md:px-6 py-1 md:py-2 rounded-full text-lg font-semibold hover:bg-white hover:text-black"
             href="/sign-up"
           >
             Sign up

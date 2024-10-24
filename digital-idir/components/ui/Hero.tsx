@@ -24,7 +24,7 @@ function Hero() {
         </h3>
         <Link
           href="/sign-up"
-          className="bg-white text-black px-8 py-3 rounded-full max-w-40 block mx-auto text-lg font-semibold mt-4 hover:bg-black hover:text-white"
+          className="bg-white text-black px-4 md:px-8 py-1 text-center md:py-3 rounded-full max-w-40 block mx-auto text-lg font-semibold mt-4 hover:bg-black hover:text-white"
         >
           Get Started
         </Link>

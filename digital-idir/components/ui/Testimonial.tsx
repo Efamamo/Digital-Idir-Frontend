@@ -19,10 +19,10 @@ function Testimonial({
         height={100}
         className="ml-auto rounded-bl-full"
       />
-      <h3 className="text-lg mt-2">
+      <h3 className="text-base md:text-lg mt-2">
         <i>{testimony}</i>
       </h3>
-      <p className="text-sm mt-2 font-semibold">{name}</p>
+      <p className="text-xs md:text-sm mt-2 font-semibold">{name}</p>
     </div>
   );
 }

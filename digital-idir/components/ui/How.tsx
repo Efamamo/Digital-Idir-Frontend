@@ -3,8 +3,8 @@ import Step from './Step';
 
 function How() {
   return (
-    <section className="py-28  text-white">
-      <h2 className="text-4xl font-bold mb-12 text-center">
+    <section className="py-28  text-white px-5 md:px-0">
+      <h2 className="text-2xl md:text-4xl font-bold mb-12 text-center">
         How Digital Idir Works
       </h2>
 
