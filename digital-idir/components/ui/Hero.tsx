@@ -9,21 +9,22 @@ function Hero() {
     <div
       className="min-h-screen flex flex-col justify-center items-center text-white pb-4"
       style={{
-        backgroundImage: `url('/assets/future.jpg')`,
+        backgroundImage: `url('/assets/dw.jpeg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
       }}
     >
       <div></div>
       <div>
-        <h1 className="text-8xl mb-4 font-semibold">Digital Idir</h1>{' '}
-        <h3 className=" text-xl ">
+        <h1 className="text-5xl md:text-8xl mb-4 font-semibold text-center">
+          Digital Idir
+        </h1>{' '}
+        <h3 className=" text-xl text-center">
           Empowering Communities, Connecting Traditions.
         </h3>
         <Link
           href="/sign-up"
-          className="bg-blue-600 rounded-full px-8 py-2 max-w-40 text-center block mx-auto mt-4 hover:bg-blue-800"
+          className="bg-white text-black px-8 py-3 rounded-full max-w-40 block mx-auto text-lg font-semibold mt-4 hover:bg-black hover:text-white"
         >
           Get Started
         </Link>

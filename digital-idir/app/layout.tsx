@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { Playfair_Display } from 'next/font/google';
-import { Roboto } from 'next/font/google';
+import { Roboto, Great_Vibes } from 'next/font/google';
 
 import './globals.css';
 
@@ -10,6 +9,11 @@ const roboto = Roboto({
   subsets: ['latin'],
 });
 
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-great-vibes',
+});
 export const metadata: Metadata = {
   title: 'Digital Idir',
   description: 'Traditional Ethiopian Insurance or Idir Digitalized',
@@ -22,8 +26,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* Apply the Roboto font to the body using className */}
-      <body className={`antialiased ${roboto.className}`}>{children}</body>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body
+        className={`antialiased ${roboto.className} ${greatVibes.variable}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
