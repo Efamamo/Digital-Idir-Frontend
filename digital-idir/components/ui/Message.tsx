@@ -27,7 +27,12 @@ function Message({ name, control, error }: FormInterface) {
       render={({ field, fieldState }) => (
         <FormItem className="mb-4">
           <FormControl>
-            <Textarea rows={5} placeholder="How can we help?" {...field} />
+            <Textarea
+              className="bg-gray-200"
+              rows={5}
+              placeholder="How can we help?"
+              {...field}
+            />
           </FormControl>
           {fieldState.error && (
             <FormMessage className="text-red-600 text-sm">

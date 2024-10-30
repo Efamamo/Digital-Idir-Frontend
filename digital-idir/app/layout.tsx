@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Roboto, Great_Vibes } from 'next/font/google';
-
+import Footer from '@/components/ui/Footer';
+import Header from '@/components/ui/Header';
 import './globals.css';
 
 // Load the Roboto font with the specified weights
@@ -33,9 +34,11 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`antialiased ${roboto.className} ${greatVibes.variable}`}
+        className={`antialiased ${roboto.className} ${greatVibes.variable} bg-black`}
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

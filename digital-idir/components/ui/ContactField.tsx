@@ -35,7 +35,7 @@ function ContactField({
         <FormItem className="mb-4">
           <FormControl>
             <Input
-              className="w-full focus-visible:ring-0 focus:border-gray-500 text-black"
+              className="w-full focus-visible:ring-0 focus:border-gray-500 text-black bg-gray-200"
               placeholder={placeholder}
               type={type}
               {...field}

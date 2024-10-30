@@ -55,7 +55,7 @@ const Accordion = () => {
         {questionsAnswers.map((qa, index) => (
           <div key={index} className="border border-[#101012] mb-2">
             <div
-              className="flex justify-between items-center p-4 rounded-sm bg-gray-100 cursor-pointer hover:bg-gray-200 transition-colors duration-300"
+              className="flex justify-between items-center p-4 rounded-sm bg-gray-200 cursor-pointer hover:bg-gray-200 transition-all duration-500"
               onClick={() => toggleAccordion(index)}
             >
               <span className="font-semibold text-sm md:text-base">

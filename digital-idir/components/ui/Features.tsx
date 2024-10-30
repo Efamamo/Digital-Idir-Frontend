@@ -10,16 +10,19 @@ function Features() {
       </h2>
       <div className="flex flex-wrap text-center max-w-screen-2xl mx-auto gap-14">
         <Feature
+          id="1"
           image="/assets/pay.jpg"
           title="Online Transactions"
           description="Enjoy secure and swift online payments powered by Chapa, allowing you to contribute to Idir groups and support your community with ease, anytime, anywhere."
         />
         <Feature
+          id="2"
           image="/assets/notify.jpg"
           title="Live Notifications"
           description="Receive real-time updates on important community news, announcements, and events, ensuring that you never miss out on key moments or information."
         />
         <Feature
+          id="3"
           image="/assets/pro.jpg"
           title="Memorials"
           description="Create lasting digital memorials to remember and honor the deceased, offering a meaningful way for family and friends to pay tribute and keep memories alive."
