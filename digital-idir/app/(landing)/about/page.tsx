@@ -1,5 +1,6 @@
 import FeaturesDetail from '@/components/ui/FeaturesDetail';
 import MVV from '@/components/ui/MVV';
+import Scroll from '@/components/ui/Scroll';
 import Team from '@/components/ui/Team';
 import React from 'react';
 

@@ -57,7 +57,7 @@ export function SignUp() {
   }
 
   return (
-    <section className="flex justify-center items-center min-h-screen">
+    <section className="flex justify-center items-center min-h-screen bg-white">
       <div className="max-w-2xl mx-5 md:mx-auto p-6 shadow-xl flex-1 rounded-lg">
         <h1 className="text-3xl font-bold text-center mb-2">Sign Up</h1>
         <div className="max-w-lg mx-5 md:mx-auto">
