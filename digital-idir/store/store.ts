@@ -3,6 +3,7 @@ import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { it } from 'node:test';
 
 interface Item {
+  id: any;
   name: string;
   image: string;
   amount: number;
@@ -16,50 +17,7 @@ interface ItemsState {
 }
 
 const initialState: ItemsState = {
-  items: [
-    {
-      name: 'Table',
-      amount: 8,
-      price: 120,
-      image: '/assets/table.jpg',
-      isAdded: false,
-    },
-    {
-      name: 'Chair',
-      amount: 100,
-      price: 60,
-      image: '/assets/chair.jpg',
-      isAdded: false,
-    },
-    {
-      name: 'Tent',
-      amount: 3,
-      price: 1000,
-      image: '/assets/tent.jpg',
-      isAdded: false,
-    },
-    {
-      name: 'Plates',
-      amount: 300,
-      price: 30,
-      image: '/assets/plate.webp',
-      isAdded: false,
-    },
-    {
-      name: 'Stwepot',
-      amount: 10,
-      price: 80,
-      image: '/assets/stewpot.jpg',
-      isAdded: false,
-    },
-    {
-      name: 'Mug',
-      amount: 300,
-      price: 40,
-      image: '/assets/mug.png',
-      isAdded: false,
-    },
-  ],
+  items: [],
   cart: [],
 };
 
@@ -67,26 +25,29 @@ export const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<{ name: string }>) => {
-      const item = state.items.find(
-        (item) => item.name === action.payload.name
-      );
+    initItems: (state, action: PayloadAction<{ items: Item[] }>) => {
+      state.items = action.payload.items;
+    },
+    addItem: (state, action: PayloadAction<{ item: Item }>) => {
+      state.items.push(action.payload.item);
+    },
+    addToCart: (state, action: PayloadAction<{ id: string }>) => {
+      const item = state.items.find((item) => item.id === action.payload.id);
 
       if (item && !item.isAdded) {
         item.isAdded = true;
-        console.log(item);
         state.cart.push({ ...item, amount: 1 });
       }
     },
 
-    removeFromCart: (state, action: PayloadAction<{ name: string }>) => {
+    removeFromCart: (state, action: PayloadAction<{ id: string }>) => {
       const itemIndex = state.cart.findIndex(
-        (item) => item.name === action.payload.name
+        (item) => item.id === action.payload.id
       );
       if (itemIndex !== -1) {
         const [item] = state.cart.splice(itemIndex, 1);
         const originalItem = state.items.find(
-          (item) => item.name === action.payload.name
+          (item) => item.id === action.payload.id
         );
         if (originalItem) {
           originalItem.isAdded = false;
@@ -94,10 +55,10 @@ export const itemsSlice = createSlice({
       }
     },
 
-    increament: (state, action: PayloadAction<{ name: string }>) => {
-      const cItem = state.cart.find((i) => i.name === action.payload.name);
+    increament: (state, action: PayloadAction<{ id: string }>) => {
+      const cItem = state.cart.find((i) => i.id === action.payload.id);
       if (cItem) {
-        const item = state.items.find((i) => i.name === action.payload.name);
+        const item = state.items.find((i) => i.id === action.payload.id);
         if (item) {
           if (cItem.amount < item.amount) {
             cItem.amount++;
@@ -106,17 +67,16 @@ export const itemsSlice = createSlice({
       }
     },
 
-    decreament: (state, action: PayloadAction<{ name: string }>) => {
-      const item = state.cart.find((i) => i.name === action.payload.name);
+    decreament: (state, action: PayloadAction<{ id: string }>) => {
+      const item = state.cart.find((i) => i.id === action.payload.id);
 
       if (item && item.amount > 1) {
         item.amount--;
       }
     },
-
     clear: (state) => {
       for (const item of state.items) {
-        const i = state.cart.find((it) => it.name === item.name);
+        const i = state.cart.find((it) => it.id === item.id);
         if (i) {
           item.isAdded = false;
         }
@@ -127,8 +87,15 @@ export const itemsSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, increament, decreament, clear } =
-  itemsSlice.actions;
+export const {
+  initItems,
+  addItem,
+  addToCart,
+  removeFromCart,
+  increament,
+  decreament,
+  clear,
+} = itemsSlice.actions;
 
 export const store = configureStore({
   reducer: {

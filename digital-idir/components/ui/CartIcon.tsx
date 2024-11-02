@@ -4,12 +4,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 interface IconProps {
+  id: string;
   image: string;
   name: string;
   price: number;
   amount: number;
 }
-function CartIcon({ name, price, image, amount }: IconProps) {
+function CartIcon({ id, name, price, image, amount }: IconProps) {
   const dispatch = useDispatch();
   return (
     <div className="flex relative justify-between items-start border-b border-gray-500 text-black pb-2">
@@ -25,6 +26,7 @@ function CartIcon({ name, price, image, amount }: IconProps) {
         </div>
 
         <h3 className="font-semibold text-base">{name}</h3>
+        <h3>{}</h3>
       </div>
       <div className="flex flex-col gap-2 items-center">
         <p className="text-base font-semibold">{amount * price} Birr</p>
@@ -36,7 +38,7 @@ function CartIcon({ name, price, image, amount }: IconProps) {
             height={20}
             className="cursor-pointer"
             onClick={() => {
-              dispatch(decreament({ name: name }));
+              dispatch(decreament({ id: id }));
             }}
           />{' '}
           <p>{amount}</p>
@@ -47,7 +49,7 @@ function CartIcon({ name, price, image, amount }: IconProps) {
             height={20}
             className="cursor-pointer"
             onClick={() => {
-              dispatch(increament({ name: name }));
+              dispatch(increament({ id: id }));
             }}
           />
         </div>
@@ -59,7 +61,7 @@ function CartIcon({ name, price, image, amount }: IconProps) {
         height={15}
         className=" text-white cursor-pointer"
         onClick={() => {
-          dispatch(removeFromCart({ name: name }));
+          dispatch(removeFromCart({ id: id }));
         }}
       />
     </div>

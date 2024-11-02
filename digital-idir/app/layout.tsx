@@ -34,7 +34,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`antialiased ${roboto.className} ${greatVibes.variable} bg-black`}
+        className={`antialiased ${roboto.className} ${greatVibes.variable} bg-gradient-to-b from-[#17171a] via-[#121417] to-black`}
       >
         <Header />
         {children}

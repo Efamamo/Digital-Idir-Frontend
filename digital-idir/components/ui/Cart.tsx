@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useRef, useState } from 'react';
 import {
   Sheet,
   SheetClose,
@@ -17,9 +18,62 @@ import { clear } from '@/store/store';
 function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector((state: any) => state.items.cart);
+  const emailRef = useRef<any>();
+  const phoneRef = useRef<any>();
+
+  const [emailError, setEmailError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   let total = 0;
   for (const item of cart) {
     total += item.amount * item.price;
+  }
+
+  async function handleRent(e: any) {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const phoneNumber = phoneRef.current.value;
+
+    if (!email) {
+      setEmailError('Email is invalid');
+      return;
+    }
+
+    if (!phoneNumber) {
+      setPhoneError('Phone Number is invalid');
+      return;
+    }
+
+    const items = cart.map((item: any) => ({
+      id: item.id,
+      amount: item.amount,
+    }));
+
+    const body = {
+      items: items,
+      email: email,
+      phoneNumber: phoneNumber,
+    };
+
+    try {
+      const response = await fetch(
+        'http://localhost:5000/api/v1/items/order-rent/',
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      if (response.ok) {
+        dispatch(clear());
+        const result = await response.json();
+        window.open(result, '_blank'); // Opens the URL in a new window or tab
+      }
+    } catch (error) {
+      console.error('Error placing order:', error);
+    }
   }
 
   return (
@@ -67,6 +121,7 @@ function Cart() {
               )}
               {cart.map((item: any) => (
                 <CartIcon
+                  id={item.id}
                   key={item.name}
                   name={item.name}
                   amount={item.amount}
@@ -76,19 +131,51 @@ function Cart() {
               ))}
             </div>
 
-            <div className="flex flex-col items-center text-black gap-2">
-              <h3 className="text-lg font-bold">Total : {total} Birr</h3>
-              <button
-                className={`bg-blue-600 text-white px-3 md:px-6 py-1 text-center md:py-2 rounded-full max-w-40 block mx-auto text-base font-semibold ${
-                  total === 0
-                    ? 'opacity-50 cursor-not-allowed'
-                    : 'hover:bg-gray-200'
-                }`}
-                disabled={total === 0}
-              >
-                Rent
-              </button>
-            </div>
+            {total > 0 && (
+              <div className="flex flex-col text-black gap-2">
+                <h3 className="text-lg font-bold">Total : {total} Birr</h3>
+                <form onSubmit={handleRent}>
+                  <div>
+                    <label className="text-base text-gray-700">
+                      Enter Your Email
+                    </label>
+                    <input
+                      type="email"
+                      ref={emailRef}
+                      className="w-full focus-visible:ring-0 focus:border-gray-500 text-black bg-gray-200 p-2 mb-4 rounded-lg"
+                    />
+                    {emailError && (
+                      <p className="text-sm text-red-600">{emailError}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="text-base text-gray-700">
+                      Enter Your Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      ref={phoneRef}
+                      className="w-full focus-visible:ring-0 focus:border-gray-500 text-black bg-gray-200 p-2 mb-4 rounded-lg"
+                    />
+                    {phoneError && (
+                      <p className="text-sm text-red-600">{phoneError}</p>
+                    )}
+                  </div>
+
+                  <button
+                    className={`bg-blue-600 w-full text-white px-3 md:px-6 py-1 text-center md:py-2 rounded-lg  block mx-auto text-base font-semibold ${
+                      total === 0
+                        ? 'opacity-50 cursor-not-allowed'
+                        : 'hover:bg-blue-800'
+                    }`}
+                    disabled={total === 0}
+                  >
+                    Rent
+                  </button>
+                </form>
+              </div>
+            )}
           </SheetDescription>
         </SheetHeader>
       </SheetContent>
