@@ -32,10 +32,10 @@ function CartIcon({ id, name, price, image, amount }: IconProps) {
           />
         </div>
 
-        <h3 className="font-semibold text-base">{toTitleCase(name)}</h3>
+        <h3 className="font-semibold text-sm">{toTitleCase(name)}</h3>
       </div>
-      <div className="flex flex-col gap-1 items-center">
-        <p className="text-base font-semibold">{amount * price} Birr</p>
+      <div className="flex flex-col gap-1.5 items-center">
+        <p className="text-sm font-semibold">{amount * price} Birr</p>
         <div className="flex justify-between py-1 px-3 gap-3 rounded-full border border-gray-700 text-base font-semibold">
           <Image
             src="/assets/minus.svg"
@@ -47,7 +47,7 @@ function CartIcon({ id, name, price, image, amount }: IconProps) {
               dispatch(decreament({ id: id }));
             }}
           />{' '}
-          <p>{amount}</p>
+          <p className="text-sm">{amount}</p>
           <Image
             src="/assets/add.svg"
             alt="product image"

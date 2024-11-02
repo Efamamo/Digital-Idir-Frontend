@@ -1,4 +1,5 @@
 import FeaturesDetail from '@/components/ui/FeaturesDetail';
+import MemorialCard from '@/components/ui/MemorialCard';
 import MVV from '@/components/ui/MVV';
 import Scroll from '@/components/ui/Scroll';
 import Team from '@/components/ui/Team';
