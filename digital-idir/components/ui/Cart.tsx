@@ -1,5 +1,7 @@
 'use client';
 import React, { useRef, useState } from 'react';
+import { z } from 'zod';
+import { Form } from '@/components/ui/form';
 import {
   Sheet,
   SheetClose,
@@ -14,35 +16,31 @@ import Image from 'next/image';
 import CartIcon from './CartIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { clear } from '@/store/store';
+import { Button } from './button';
+import { useForm } from 'react-hook-form';
+import { rentFormSchema } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import RentField from './RentField';
 
 function Cart() {
   const dispatch = useDispatch();
-  const cart = useSelector((state: any) => state.items.cart);
-  const emailRef = useRef<any>();
-  const phoneRef = useRef<any>();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [emailError, setEmailError] = useState('');
-  const [phoneError, setPhoneError] = useState('');
+  const cart = useSelector((state: any) => state.items.cart);
   let total = 0;
   for (const item of cart) {
     total += item.amount * item.price;
   }
 
-  async function handleRent(e: any) {
-    e.preventDefault();
-    const email = emailRef.current.value;
-    const phoneNumber = phoneRef.current.value;
+  const form = useForm<z.infer<typeof rentFormSchema>>({
+    resolver: zodResolver(rentFormSchema),
+    defaultValues: {},
+  });
 
-    if (!email) {
-      setEmailError('Email is invalid');
-      return;
-    }
-
-    if (!phoneNumber) {
-      setPhoneError('Phone Number is invalid');
-      return;
-    }
-
+  async function onSubmit(values: z.infer<typeof rentFormSchema>) {
+    setIsLoading(true);
+    const email = values.email;
+    const phoneNumber = values.phoneNumber;
     const items = cart.map((item: any) => ({
       id: item.id,
       amount: item.amount,
@@ -65,6 +63,7 @@ function Cart() {
           body: JSON.stringify(body),
         }
       );
+      setIsLoading(false);
 
       if (response.ok) {
         dispatch(clear());
@@ -72,6 +71,8 @@ function Cart() {
         window.open(result, '_blank'); // Opens the URL in a new window or tab
       }
     } catch (error) {
+      setIsLoading(false);
+
       console.error('Error placing order:', error);
     }
   }
@@ -81,10 +82,10 @@ function Cart() {
       <SheetTrigger>
         <Image src="/assets/cart.svg" alt="cart" width={20} height={20} />
       </SheetTrigger>
-      <SheetContent className="pt-14 bg-gray-400 border-none">
+      <SheetContent className="pt-14 bg-gray-200 border-none w-full overflow-scroll">
         <SheetHeader>
           <SheetTitle>
-            <div className="flex justify-between items-end mb-4">
+            <div className="flex justify-between items-end mb-6">
               <h3
                 className="text-3xl font-bold"
                 style={{
@@ -103,7 +104,7 @@ function Cart() {
                   className="text-sm"
                 >
                   <Image
-                    src="/assets/eraser.png"
+                    src="/assets/eraser.svg"
                     alt="clear"
                     width={23}
                     height={23}
@@ -115,8 +116,8 @@ function Cart() {
           <SheetDescription className="flex flex-col justify-between h-screen pb-40">
             <div className="flex flex-col gap-6 pt-6">
               {cart.length === 0 && (
-                <p className="text-black text-center font-semibold">
-                  No items in the cart
+                <p className="text-black text-center font-semibold text-lg">
+                  No item in the cart
                 </p>
               )}
               {cart.map((item: any) => (
@@ -132,48 +133,52 @@ function Cart() {
             </div>
 
             {total > 0 && (
-              <div className="flex flex-col text-black gap-2">
+              <div className="flex flex-col text-black gap-2 mt-10">
                 <h3 className="text-lg font-bold">Total : {total} Birr</h3>
-                <form onSubmit={handleRent}>
-                  <div>
-                    <label className="text-base text-gray-700">
-                      Enter Your Email
-                    </label>
-                    <input
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <RentField
+                      name="email"
+                      placeholder="Enter your email"
+                      control={form.control}
+                      label="Email"
                       type="email"
-                      ref={emailRef}
-                      className="w-full focus-visible:ring-0 focus:border-gray-500 text-black bg-gray-200 p-2 mb-4 rounded-lg"
+                      error=""
                     />
-                    {emailError && (
-                      <p className="text-sm text-red-600">{emailError}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="text-base text-gray-700">
-                      Enter Your Phone Number
-                    </label>
-                    <input
-                      type="text"
-                      ref={phoneRef}
-                      className="w-full focus-visible:ring-0 focus:border-gray-500 text-black bg-gray-200 p-2 mb-4 rounded-lg"
+                    <RentField
+                      name="phoneNumber"
+                      placeholder="Enter your Phone Number"
+                      control={form.control}
+                      label="Phone Number"
+                      type="tel"
+                      error=""
                     />
-                    {phoneError && (
-                      <p className="text-sm text-red-600">{phoneError}</p>
-                    )}
-                  </div>
 
-                  <button
-                    className={`bg-blue-600 w-full text-white px-3 md:px-6 py-1 text-center md:py-2 rounded-lg  block mx-auto text-base font-semibold ${
-                      total === 0
-                        ? 'opacity-50 cursor-not-allowed'
-                        : 'hover:bg-blue-800'
-                    }`}
-                    disabled={total === 0}
-                  >
-                    Rent
-                  </button>
-                </form>
+                    <Button
+                      className={`bg-blue-600 w-full text-white px-3 md:px-6 py-1 text-center md:py-2 rounded-lg  block mx-auto text-base font-semibold ${
+                        total === 0
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'hover:bg-blue-800'
+                      }`}
+                      disabled={total === 0}
+                    >
+                      {' '}
+                      {!isLoading ? (
+                        <p className="text-base font-semibold">
+                          Continue With Chapa
+                        </p>
+                      ) : (
+                        <Image
+                          src="/assets/loading.svg"
+                          alt="loading"
+                          width={30}
+                          height={30}
+                          className="mx-auto"
+                        />
+                      )}
+                    </Button>
+                  </form>
+                </Form>
               </div>
             )}
           </SheetDescription>

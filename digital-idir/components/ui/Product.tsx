@@ -15,6 +15,14 @@ interface ProductProps {
 function Product({ id, isAdded, name, amount, price, image }: ProductProps) {
   const dispatch = useDispatch();
 
+  function toTitleCase(str: string) {
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   return (
     <div className="max-w-max flex-grow-0 p-6 bg-[#101012] rounded-lg pb-3">
       <Image
@@ -24,26 +32,29 @@ function Product({ id, isAdded, name, amount, price, image }: ProductProps) {
         height={300}
         className="rounded-sm"
       />
-      <h3 className="text-center mt-2 text-lg font-semibold">{name}</h3>
-      <div className="flex justify-center gap-16 my-1">
+      <h3 className="text-center mt-2 text-lg font-semibold">
+        {toTitleCase(name)}
+      </h3>
+      <div className="flex justify-between items-center my-2">
         <p>Amount: {amount}</p>
         <p>
           Price: <span className="font-bold">{price}</span> Birr
         </p>
+        {isAdded ? (
+          <p className="text-gray-400">Added</p>
+        ) : (
+          <div
+            className="bg-white px-2 py-1 rounded-sm cursor-pointer"
+            onClick={() => {
+              if (!isAdded) {
+                dispatch(addToCart({ id }));
+              }
+            }}
+          >
+            <Image src="/assets/add.svg" alt="add" width={20} height={20} />
+          </div>
+        )}
       </div>
-      <button
-        onClick={() => {
-          if (!isAdded) {
-            dispatch(addToCart({ id }));
-          }
-        }}
-        className={`bg-white text-black px-3 md:px-6 py-1 text-center md:py-2 rounded-full max-w-40 block mx-auto text-base font-semibold mt-4 ${
-          isAdded ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'
-        }`}
-        disabled={isAdded}
-      >
-        {isAdded ? 'Added' : 'Add to Cart'}
-      </button>
     </div>
   );
 }

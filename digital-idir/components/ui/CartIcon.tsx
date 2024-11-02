@@ -11,26 +11,32 @@ interface IconProps {
   amount: number;
 }
 function CartIcon({ id, name, price, image, amount }: IconProps) {
+  function toTitleCase(str: string) {
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
   const dispatch = useDispatch();
   return (
     <div className="flex relative justify-between items-start border-b border-gray-500 text-black pb-2">
-      <div className="flex items-center gap-6">
+      <div className="flex items-start gap-6">
         <div className="relative">
           <Image
             src={image}
             alt="product image"
             width={100}
-            height={60}
+            height={100}
             className="rounded-lg"
           />
         </div>
 
-        <h3 className="font-semibold text-base">{name}</h3>
-        <h3>{}</h3>
+        <h3 className="font-semibold text-base">{toTitleCase(name)}</h3>
       </div>
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col gap-1 items-center">
         <p className="text-base font-semibold">{amount * price} Birr</p>
-        <div className="flex justify-between py-1 px-4 gap-3 rounded-full border border-gray-700 text-base font-semibold">
+        <div className="flex justify-between py-1 px-3 gap-3 rounded-full border border-gray-700 text-base font-semibold">
           <Image
             src="/assets/minus.svg"
             alt="product image"
@@ -59,7 +65,7 @@ function CartIcon({ id, name, price, image, amount }: IconProps) {
         alt="cancel"
         width={15}
         height={15}
-        className=" text-white cursor-pointer"
+        className=" text-black cursor-pointer"
         onClick={() => {
           dispatch(removeFromCart({ id: id }));
         }}

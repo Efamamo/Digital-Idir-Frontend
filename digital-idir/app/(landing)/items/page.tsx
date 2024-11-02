@@ -17,32 +17,34 @@ function page() {
 
 function Items() {
   const dispatch = useDispatch();
+  const items = useSelector((state: any) => state.items.items);
 
   useEffect(() => {
     async function fetchItems() {
       const response = await fetch('http://localhost:5000/api/v1/items/');
       const data = await response.json();
-      const items: any = data.map((item: any) => ({
+      const its: any = data.map((item: any) => ({
         id: item._id,
         name: item.name,
-        image: 'http://localhost:500' + item.imageURL,
+        image: 'http://localhost:5000/' + item.imageURL,
         amount: item.amount,
         price: item.price,
         isAdded: false,
       }));
 
-      dispatch(initItems({ items: items }));
+      if (!items.length) {
+        dispatch(initItems({ items: its }));
+      }
     }
 
     fetchItems();
-  }, []); // Dependency array includes items to track changes
+  }, []);
 
-  const items = useSelector((state: any) => state.items.items);
   return (
     <div className=" text-white md:mx-40 pt-24 px-5 md:px-0 min-h-screen">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center pt-4">
         <div></div>
-        <h2 className="text-white font-bold text-4xl text-center pt-10">
+        <h2 className="text-white font-bold text-2xl md:text-4xl text-center md:pt-10">
           Discover our Products
         </h2>
 

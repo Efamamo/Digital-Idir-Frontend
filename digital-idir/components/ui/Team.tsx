@@ -7,7 +7,7 @@ function Team() {
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         <div className="team-member text-center">
           <img
-            src="https://via.placeholder.com/150"
+            src="/assets/ephrem.jpeg"
             alt="Team Member"
             className="w-24 h-24 rounded-full mx-auto mb-4"
           />
@@ -16,7 +16,7 @@ function Team() {
         </div>
         <div className="team-member text-center">
           <img
-            src="https://via.placeholder.com/150"
+            src="/assets/beka.jpeg"
             alt="Team Member"
             className="w-24 h-24 rounded-full mx-auto mb-4"
           />
@@ -25,11 +25,11 @@ function Team() {
         </div>
         <div className="team-member text-center">
           <img
-            src="https://via.placeholder.com/150"
+            src="/assets/chachi.jpeg"
             alt="Team Member"
             className="w-24 h-24 rounded-full mx-auto mb-4"
           />
-          <h3 className="text-xl font-semibold">Biruk Tesfaye</h3>
+          <h3 className="text-xl font-semibold">Nardos Daniel</h3>
           <p className="text-gray-500">Lead Developer</p>
         </div>
       </div>

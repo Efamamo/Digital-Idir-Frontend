@@ -24,7 +24,10 @@ function MobileNav() {
           color="white"
         />
       </SheetTrigger>
-      <SheetContent side={'left'} className="pt-14 bg-gray-400 border-none">
+      <SheetContent
+        side={'left'}
+        className="pt-14 bg-gray-200 border-none w-full"
+      >
         <SheetHeader>
           <SheetTitle>
             <SheetClose asChild>
@@ -50,7 +53,7 @@ function MobileNav() {
             </SheetClose>
             <SheetClose asChild>
               <Link
-                href="/"
+                href="/items"
                 className="text-lg font-semibold text-black hover:text-gray-900"
               >
                 Items
@@ -58,7 +61,7 @@ function MobileNav() {
             </SheetClose>
             <SheetClose asChild>
               <Link
-                href="/"
+                href="/about"
                 className="font-semibold text-black hover:text-gray-900 text-lg"
               >
                 About Us

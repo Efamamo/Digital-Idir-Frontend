@@ -30,6 +30,18 @@ export const signUpFormSchema = z
     message: 'Passwords do not match',
   });
 
+export const rentFormSchema = z.object({
+  email: z
+    .string({ message: 'Email is Required' })
+    .email({ message: 'Invalid Email format' }),
+
+  phoneNumber: z
+    .string({ message: 'Phone Number is Required' })
+    .regex(/^[0-9]{10}$/, {
+      message: 'Invalid phone number. Must be 10 digits.',
+    }),
+});
+
 export const signInFormSchema = z.object({
   email: z
     .string({ message: 'Email is Required' })
@@ -37,7 +49,6 @@ export const signInFormSchema = z.object({
 
   password: z.string({ message: 'Password is Required' }),
 });
-
 export const contactFormSchema = z.object({
   firstName: z
     .string({ message: 'firstName is Required' })
