@@ -53,7 +53,7 @@ export function SignIn() {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
 
-      router.push('/');
+      router.push('/dashboard');
     }
   }
 

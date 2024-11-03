@@ -36,9 +36,7 @@ export default function RootLayout({
       <body
         className={`antialiased ${roboto.className} ${greatVibes.variable} bg-gradient-to-b from-[#17171a] via-[#121417] to-black`}
       >
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );

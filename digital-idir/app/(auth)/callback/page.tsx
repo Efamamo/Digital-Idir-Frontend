@@ -14,7 +14,7 @@ function Callback() {
     if (accessToken && refreshToken) {
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-      router.push('/');
+      router.push('/dashboard');
     } else {
       router.push('/login');
     }

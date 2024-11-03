@@ -22,8 +22,8 @@ function Memorials() {
     fetchMemorials();
   }, []);
   return (
-    <div className=" text-white md:mx-40 pt-24 px-5 md:px-0 min-h-screen">
-      <h2 className="text-white font-bold text-2xl md:text-3xl text-center md:pt-10">
+    <div className=" text-white md:mx-2 lg:mx-40  px-14 md:px-0">
+      <h2 className="text-white font-bold text-2xl md:text-3xl text-center">
         In Loving Memorial Of
       </h2>
 
@@ -33,7 +33,7 @@ function Memorials() {
         </h3>
       )}
 
-      <div className="flex flex-wrap gap-20 items-center justify-center my-20">
+      <div className="flex flex-wrap gap-20 items-center justify-center my-20 max-w-7xl">
         {memorials.map((memorial: any) => (
           <MemorialCard
             name={memorial.name}

@@ -20,7 +20,7 @@ function CartIcon({ id, name, price, image, amount }: IconProps) {
   }
   const dispatch = useDispatch();
   return (
-    <div className="flex relative justify-between items-start border-b border-gray-500 text-black pb-2">
+    <div className="flex relative justify-between items-start border-b border-gray-500 text-black pb-3">
       <div className="flex items-start gap-6">
         <div className="relative">
           <Image

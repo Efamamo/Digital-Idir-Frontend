@@ -34,7 +34,7 @@ function getDateParts(isoDate: any) {
 
 function MemorialCard({ name, image, dob, dop, desc }: MemorialProp) {
   return (
-    <div className="bg-white max-w-sm relative rounded-lg">
+    <div className="bg-white max-w-xs relative rounded-lg">
       <Image
         className="rounded-t-lg"
         src="/assets/candle.webp"
@@ -42,8 +42,8 @@ function MemorialCard({ name, image, dob, dop, desc }: MemorialProp) {
         width={320}
         height={200}
       />
-      <div className="h-44"></div>
-      <div className="absolute top-36 left-4 flex flex-col items-center gap-1">
+      <div className="h-40"></div>
+      <div className="absolute top-28 md:top-36 left-0 w-full flex flex-col items-center gap-1">
         <Image
           src={image}
           alt="Profile"

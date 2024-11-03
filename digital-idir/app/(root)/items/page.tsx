@@ -41,10 +41,10 @@ function Items() {
   }, []);
 
   return (
-    <div className=" text-white md:mx-40 pt-24 px-5 md:px-0 min-h-screen">
-      <div className="flex justify-between items-center pt-4">
+    <div className=" text-white md:mx-2 lg:mx-40 px-5 md:px-0">
+      <div className="flex justify-between items-center">
         <div></div>
-        <h2 className="text-white font-bold text-2xl md:text-4xl text-center md:pt-10">
+        <h2 className="text-white font-bold text-2xl md:text-4xl text-center">
           Discover our Products
         </h2>
 
@@ -63,7 +63,7 @@ function Items() {
         </div>
       )}
 
-      <div className="flex gap-20 flex-wrap py-14 justify-center items-center">
+      <div className="flex flex-wrap gap-20 items-center justify-center my-20 max-w-7xl">
         {items.map((item: any) => (
           <Product
             key={item.id}

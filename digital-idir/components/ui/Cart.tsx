@@ -114,7 +114,7 @@ function Cart() {
             </div>
           </SheetTitle>
           <SheetDescription className="flex flex-col justify-between h-screen pb-40">
-            <div className="flex flex-col gap-6 pt-6">
+            <div className="flex flex-col gap-8 pt-6">
               {cart.length === 0 && (
                 <p className="text-black text-center font-semibold text-lg">
                   No item in the cart
