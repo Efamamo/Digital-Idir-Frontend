@@ -7,7 +7,7 @@ import { sidebarLinks } from '@/constants';
 export default function LeftSideBar() {
   const pathName = usePathname();
   return (
-    <section className="custom-scrollbar sticky left-0 top-0 z-20 flex gap-44 pb-4 max-w-2/12 min-w-28 flex-col justify-between overflow-auto border-r border-r-dark-4 bg-dark-2 max-lg:hidden">
+    <section className="custom-scrollbar sticky left-0 top-0 z-20 flex gap-56 pb-4 w-2/12 min-w-28 flex-col justify-between overflow-auto border-r border-r-dark-4 bg-dark-2 max-lg:hidden">
       <div className="flex w-full flex-1 flex-col gap-4 px-6 text-white">
         {sidebarLinks.map((link: any) => {
           const isActive =
@@ -19,7 +19,7 @@ export default function LeftSideBar() {
               href={link.route}
               key={link.label}
               className={`relative flex justify-start gap-3 rounded-lg p-4 ${
-                isActive && 'bg-purple-500'
+                isActive && 'bg-purple-600'
               }`}
             >
               <Image

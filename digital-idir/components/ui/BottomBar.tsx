@@ -20,7 +20,7 @@ export default function BottomBar() {
               href={link.route}
               key={link.label}
               className={`relative flex flex-col items-center gap-2 rounded-lg p-2 sm:flex-1 sm:px-2 sm:py-2.5 ${
-                isActive && 'bg-primary-500'
+                isActive && 'bg-purple-600'
               }`}
             >
               <Image
