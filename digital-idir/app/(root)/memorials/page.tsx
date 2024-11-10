@@ -2,7 +2,7 @@
 import MemorialCard from '@/components/ui/MemorialCard';
 import React, { useEffect, useState } from 'react';
 
-function Memorials() {
+export default function Memorials() {
   const [memorials, setMemorials] = useState([]);
 
   useEffect(() => {
@@ -47,5 +47,3 @@ function Memorials() {
     </div>
   );
 }
-
-export default Memorials;

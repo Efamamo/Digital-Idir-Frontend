@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-function Verify() {
+export default function Verify() {
   return (
     <div className="h-[60vh] flex justify-center items-center">
       <div className="w-[420px] p-8 rounded-lg  shadow-lg text-center">
@@ -26,5 +26,3 @@ function Verify() {
     </div>
   );
 }
-
-export default Verify;

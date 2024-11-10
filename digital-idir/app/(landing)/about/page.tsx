@@ -5,7 +5,7 @@ import Scroll from '@/components/ui/Scroll';
 import Team from '@/components/ui/Team';
 import React from 'react';
 
-function About() {
+export default function About() {
   return (
     <div className=" text-white md:mx-40 pt-24 px-5 md:px-0">
       <h1 className="text-white font-bold text-4xl text-center py-10">
@@ -81,5 +81,3 @@ function About() {
     </div>
   );
 }
-
-export default About;

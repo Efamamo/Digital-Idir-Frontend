@@ -8,7 +8,7 @@ import How from '@/components/ui/How';
 import Testimonials from '@/components/ui/Testimonials';
 import React from 'react';
 
-function Home() {
+export default function Home() {
   return (
     <>
       <Hero />
@@ -26,5 +26,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;

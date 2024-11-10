@@ -9,8 +9,14 @@ interface TrendingProps {
 
 function Trending({ image, title, date }: TrendingProps) {
   return (
-    <div className="shadow-lg flex flex-col md:flex-row gap-8 items-center bg-[#101012] p-4 max-w-md cursor-pointer">
-      <Image src={image} alt="news image" width={200} height={200} />
+    <div className="shadow-lg flex flex-col md:flex-row gap-8 items-center bg-[#101012] p-2 max-w-md cursor-pointer">
+      <Image
+        src={image}
+        alt="news image"
+        width={200}
+        height={200}
+        className="max-md:w-full"
+      />
       <div>
         <h2 className="font-semibold text-base ">{title}</h2>
         <div className="flex gap-2">

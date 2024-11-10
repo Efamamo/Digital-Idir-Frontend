@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { useReducer, useState } from 'react';
 import { redirect, useRouter } from 'next/navigation';
 
-export function SignUp() {
+export default function SignUp() {
   const [usernameError, setUsernameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setpasswordError] = useState('');
@@ -157,5 +157,3 @@ export function SignUp() {
     </section>
   );
 }
-
-export default SignUp;

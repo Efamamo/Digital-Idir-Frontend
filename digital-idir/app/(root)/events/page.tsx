@@ -22,7 +22,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example() {
+export default function Events() {
   const [meetings, setMeetings] = useState([]);
 
   const formatDateToOnlyDate = (dateString: string) => {
@@ -85,11 +85,11 @@ export default function Example() {
   );
 
   return (
-    <div className="mt-20 flex-grow">
+    <div className="mt-20 flex-grow pb-20">
       <h2 className="text-2xl md:text-3xl font-bold my-8 text-white text-center">
         Events
       </h2>
-      <div className="pt-16">
+      <div className="pt-16 ">
         <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6 text-white">
           <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
             <div className="md:pr-14">

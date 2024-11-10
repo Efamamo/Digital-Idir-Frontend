@@ -15,7 +15,7 @@ function page() {
   );
 }
 
-function Items() {
+export default function Items() {
   const dispatch = useDispatch();
   const items = useSelector((state: any) => state.items.items);
 
@@ -79,5 +79,3 @@ function Items() {
     </div>
   );
 }
-
-export default page;

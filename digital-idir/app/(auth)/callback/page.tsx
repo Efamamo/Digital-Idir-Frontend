@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-function Callback() {
+export default function Callback() {
   const router = useRouter();
 
   useEffect(() => {
@@ -35,5 +35,3 @@ function Callback() {
     </div>
   );
 }
-
-export default Callback;

@@ -4,7 +4,6 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 
 function formatDateTime(isoDate: string): { date: string; time: string } {
- 
   const date = new Date(isoDate);
   const today = new Date();
 
@@ -26,7 +25,7 @@ function formatDateTime(isoDate: string): { date: string; time: string } {
   return { date: day, time: time };
 }
 
-function Announcements() {
+export default function Announcements() {
   const [announcements, setAnnouncements] = useState([]);
   const [filteredAnnouncements, setFilteredAnnouncements] = useState([]);
 
@@ -93,5 +92,3 @@ function Announcements() {
     </div>
   );
 }
-
-export default Announcements;

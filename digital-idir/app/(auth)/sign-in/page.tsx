@@ -13,7 +13,7 @@ import SignInField from '@/components/ui/SignInField';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export function SignIn() {
+export default function SignIn() {
   const [credentialError, setCredentialError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -138,5 +138,3 @@ export function SignIn() {
     </section>
   );
 }
-
-export default SignIn;

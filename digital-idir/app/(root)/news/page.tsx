@@ -5,7 +5,7 @@ import Trending from '@/components/ui/Trending';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-function formatDateTime(isoDate: string): {
+export default function formatDateTime(isoDate: string): {
   time: string;
   day: string;
   month: string;
@@ -79,5 +79,3 @@ function News() {
     </section>
   );
 }
-
-export default News;
