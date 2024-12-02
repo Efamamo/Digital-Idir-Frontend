@@ -170,7 +170,7 @@ export default function Events() {
                       {meetings.some((meeting) =>
                         isSameDay(parseISO(meeting.startTime), day)
                       ) && (
-                        <div className="w-full h-1 rounded-full bg-sky-500"></div>
+                        <div className="w-2/3 m-auto h-0.5 rounded-full bg-sky-500"></div>
                       )}
                     </div>
                   </div>
@@ -190,7 +190,7 @@ export default function Events() {
                     <Meeting meeting={meeting} key={meeting.id} />
                   ))
                 ) : (
-                  <p>No meetings for today.</p>
+                  <p>No Events for today.</p>
                 )}
               </ol>
             </section>

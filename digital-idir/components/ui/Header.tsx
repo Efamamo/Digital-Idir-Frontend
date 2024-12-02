@@ -12,7 +12,7 @@ function Header() {
         <div className="md:hidden">
           <MobileNav />
         </div>
-        <div className="hidden md:flex gap-2 items-center">
+        <div className="max-md:hidden flex gap-2 items-center">
           <Link
             href="/"
             className="text-3xl font-bold mb-4"
@@ -25,7 +25,7 @@ function Header() {
           </Link>
         </div>
 
-        <div className="hidden md:flex gap-6 justify-center items-center ml-8">
+        <div className="max-md:hidden flex gap-6 justify-center items-center ml-8">
           <Link
             href="/"
             className={`font-semibold hover:text-gray-400 text-base pb-1 ${

@@ -1,8 +1,8 @@
 export const sidebarLinks = [
   {
     imgURL: '/assets/dashboard.svg',
-    route: '/dashboard',
-    label: 'Dashboard',
+    route: '/feeds',
+    label: 'Feeds',
   },
   {
     imgURL: '/assets/news.svg',

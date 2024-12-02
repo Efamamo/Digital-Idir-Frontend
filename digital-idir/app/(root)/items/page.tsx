@@ -7,7 +7,7 @@ import Cart from '@/components/ui/Cart';
 import { addItem, initItems, store } from '@/store/store';
 import Image from 'next/image';
 
-function page() {
+export default function page() {
   return (
     <Provider store={store}>
       <Items />
@@ -15,7 +15,7 @@ function page() {
   );
 }
 
-export default function Items() {
+function Items() {
   const dispatch = useDispatch();
   const items = useSelector((state: any) => state.items.items);
 
